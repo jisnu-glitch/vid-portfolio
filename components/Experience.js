@@ -194,11 +194,7 @@ export default function Experience({ experience }) {
                     );
                   })}
                 </div>
-                <span className="exp-scrubber-hint">
-                  {isPaused
-                    ? "AUTO-CYCLE PAUSED // CLICK TO JUMP"
-                    : "AUTO-CYCLE ACTIVE // HOVER TO PAUSE"}
-                </span>
+                
               </div>
             </div>
           );

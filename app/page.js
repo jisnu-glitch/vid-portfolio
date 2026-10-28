@@ -50,7 +50,7 @@ export default function Home() {
 
           <section className="quote-section">
             <div className="audio-meter" aria-hidden="true">
-              <span className="audio-label">AUDIO MASTER // 48kHz 24-BIT</span>
+              {/* <span className="audio-label">AUDIO MASTER // 48kHz 24-BIT</span> */}
               <div className="eq-bars">
                 <span className="eq-bar" style={{ animationDelay: "0.0s", "--h-peak": "24px" }} />
                 <span className="eq-bar" style={{ animationDelay: "0.22s", "--h-peak": "30px" }} />
@@ -67,17 +67,11 @@ export default function Home() {
               </div>
             </div>
             <p className="quote">"{testimonial.quote}"</p>
-            <div className="quote-meta">
-              <span className="quote-beat-pulse" aria-hidden="true" />
-              <p className="by">{testimonial.by}</p>
-            </div>
+    
           </section>
 
           <section id="contact" className="contact">
-            <div className="contact-status-badge">
-              <span className="live-rec-dot" aria-hidden="true" />
-              <span className="status-label">SYSTEM ONLINE // {site.availability.toUpperCase()}</span>
-            </div>
+            
             <h2>Have footage that needs a finish?</h2>
             <div className="mail-container">
               <a className="mail" href={`mailto:${site.email}`}>

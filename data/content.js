@@ -14,8 +14,8 @@ export const hero = {
   headline: "Every frame has a feeling.",
   lede:
     "Video editor and colorist focused on cinematic storytelling, music-driven edits and creating moods through color. From travel films to personal stories, I turn raw footage into visuals that stay with you.",
-  captionLeft: "The final look",
-  captionRight: "Before the grade",
+  captionLeft: "Before the grade",
+  captionRight: "The Final look",
   labelBefore: "Original footage",
   labelAfter: "Final grade",
   // Put your two video files in /public and reference them here, e.g. "/before.mp4" and "/after.mp4".
