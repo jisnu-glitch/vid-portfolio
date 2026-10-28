@@ -242,10 +242,10 @@ button.theme:hover{background:#FFD600;color:#000;border-color:#FFD600}
 
 /* Easy Ease automatic transition */
 .grade--animating .handle{
-  transition:left 2.2s cubic-bezier(0.42, 0, 0.58, 1);
+  transition:left 2.0s cubic-bezier(0.42, 0, 0.58, 1);
 }
 .grade--animating .scene.graded{
-  transition:clip-path 2.2s cubic-bezier(0.42, 0, 0.58, 1);
+  transition:clip-path 2.0s cubic-bezier(0.42, 0, 0.58, 1);
 }
 
 /* Auto Wipe replay button */

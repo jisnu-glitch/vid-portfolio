@@ -9,10 +9,16 @@ export default function GradeSlider({ hero }) {
 
   const afterRef  = useRef(null);
   const beforeRef = useRef(null);
-  const animTimer = useRef(null);
+  const timers    = useRef([]);
 
   const hasVideos = hero.beforeVideo && hero.afterVideo;
   const hasImages = hero.beforeImage && hero.afterImage;
+
+  // Clear all pending transition timers
+  const clearAllTimers = useCallback(() => {
+    timers.current.forEach(clearTimeout);
+    timers.current = [];
+  }, []);
 
   // Attempt to play both videos simultaneously
   const tryPlay = useCallback(() => {
@@ -23,29 +29,42 @@ export default function GradeSlider({ hero }) {
     before.play().catch(() => {});
   }, []);
 
-  // Trigger the automatic Easy Ease grade reveal animation
+  // Choreographed 2-stage Easy Ease reveal: 0% -> 50% (middle pause) -> 100% (right end)
   const triggerAutoWipe = useCallback(() => {
-    // Reset to 0 (full Log footage) with no animation delay first
+    clearAllTimers();
     setIsAnimating(false);
     setP(0);
 
-    // Wait a brief moment, then glide rightwards to 50% with Easy Ease
-    animTimer.current = setTimeout(() => {
-      setIsAnimating(true);
-      setP(50);
-
-      // Animation duration is 2.2s
+    // Stage 1: Wait 400ms showing 100% Log, then Easy Ease to 50% (middle)
+    timers.current.push(
       setTimeout(() => {
-        setIsAnimating(false);
-      }, 2300);
-    }, 450);
-  }, []);
+        setIsAnimating(true);
+        setP(50);
+
+        // Stage 2: After spending ~1.5s in the middle, continue Easy Ease to 100% (right end)
+        // 2000ms animation duration + 1500ms middle pause = 3500ms
+        timers.current.push(
+          setTimeout(() => {
+            setIsAnimating(true);
+            setP(100);
+
+            // Settle once it reaches the right end
+            timers.current.push(
+              setTimeout(() => {
+                setIsAnimating(false);
+              }, 2100)
+            );
+          }, 3500)
+        );
+      }, 400)
+    );
+  }, [clearAllTimers]);
 
   // Run the automatic wipe on initial mount / video playback
   useEffect(() => {
     triggerAutoWipe();
-    return () => clearTimeout(animTimer.current);
-  }, [triggerAutoWipe]);
+    return () => clearAllTimers();
+  }, [triggerAutoWipe, clearAllTimers]);
 
   // Handle video ready state & play
   useEffect(() => {
@@ -88,10 +107,10 @@ export default function GradeSlider({ hero }) {
     return () => after.removeEventListener("timeupdate", sync);
   }, [hasVideos]);
 
-  // Manual drag handler: disables auto animation immediately for instant response
+  // Manual drag handler: cancels animation instantly for 1:1 manual control
   const handleManualChange = (newVal) => {
+    clearAllTimers();
     setIsAnimating(false);
-    clearTimeout(animTimer.current);
     setP(newVal);
   };
 
