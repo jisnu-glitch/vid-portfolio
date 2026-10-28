@@ -48,9 +48,29 @@ export default function Home() {
             </div>
           </section>
 
-          <section>
+          <section className="quote-section">
+            <div className="audio-meter" aria-hidden="true">
+              <span className="audio-label">AUDIO MASTER // 48kHz 24-BIT</span>
+              <div className="eq-bars">
+                <span className="eq-bar" style={{ animationDelay: "0.0s", "--h-peak": "24px" }} />
+                <span className="eq-bar" style={{ animationDelay: "0.22s", "--h-peak": "30px" }} />
+                <span className="eq-bar" style={{ animationDelay: "0.1s", "--h-peak": "18px" }} />
+                <span className="eq-bar" style={{ animationDelay: "0.35s", "--h-peak": "32px" }} />
+                <span className="eq-bar" style={{ animationDelay: "0.16s", "--h-peak": "26px" }} />
+                <span className="eq-bar" style={{ animationDelay: "0.42s", "--h-peak": "34px" }} />
+                <span className="eq-bar" style={{ animationDelay: "0.28s", "--h-peak": "28px" }} />
+                <span className="eq-bar" style={{ animationDelay: "0.08s", "--h-peak": "20px" }} />
+                <span className="eq-bar" style={{ animationDelay: "0.3s", "--h-peak": "32px" }} />
+                <span className="eq-bar" style={{ animationDelay: "0.18s", "--h-peak": "16px" }} />
+                <span className="eq-bar" style={{ animationDelay: "0.45s", "--h-peak": "28px" }} />
+                <span className="eq-bar" style={{ animationDelay: "0.12s", "--h-peak": "22px" }} />
+              </div>
+            </div>
             <p className="quote">"{testimonial.quote}"</p>
-            <p className="by">{testimonial.by}</p>
+            <div className="quote-meta">
+              <span className="quote-beat-pulse" aria-hidden="true" />
+              <p className="by">{testimonial.by}</p>
+            </div>
           </section>
 
           <section id="contact" className="contact">
