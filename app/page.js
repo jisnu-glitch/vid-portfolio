@@ -3,6 +3,7 @@ import HeroTitle from "../components/HeroTitle";
 import SiteHeader from "../components/SiteHeader";
 import LazyProjectGrid from "../components/LazyProjectGrid";
 import Experience from "../components/Experience";
+import ServicesTimeline from "../components/ServicesTimeline";
 import { site, hero, projects, experience, pipeline, about, testimonial, links } from "../data/content";
 
 export default function Home() {
@@ -27,11 +28,7 @@ export default function Home() {
 
           <section id="services">
             <h2>From first cut to final delivery</h2>
-            <div className="pipeline">
-              {pipeline.map((s) => (
-                <div key={s.title}><h3>{s.title}</h3><p>{s.text}</p></div>
-              ))}
-            </div>
+            <ServicesTimeline pipeline={pipeline} />
           </section>
 
           <section id="about">
