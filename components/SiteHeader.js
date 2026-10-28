@@ -4,10 +4,11 @@ import JVLogo from "./JVLogo";
 import ThemeToggle from "./ThemeToggle";
 
 const LINKS = [
-  { label: "Work",     href: "#work"     },
-  { label: "Services", href: "#services" },
-  { label: "About",    href: "#about"    },
-  { label: "Contact",  href: "#contact"  },
+  { label: "Work",       href: "#work"       },
+  { label: "Experience", href: "#experience" },
+  { label: "Services",   href: "#services"   },
+  { label: "About",      href: "#about"      },
+  { label: "Contact",    href: "#contact"    },
 ];
 
 export default function SiteHeader() {
@@ -52,11 +53,11 @@ export default function SiteHeader() {
             </a>
           ))}
 
-          <span className="snav-sep" aria-hidden="true" />
+          {/* <span className="snav-sep" aria-hidden="true" /> */}
 
-          <div style={{ animation: `nav-drop-in .55s cubic-bezier(.22,1,.36,1) calc(.52s + 4 * .07s) both` }}>
+          {/* <div style={{ animation: `nav-drop-in .55s cubic-bezier(.22,1,.36,1) calc(.52s + 4 * .07s) both` }}>
             <ThemeToggle />
-          </div>
+          </div> */}
         </nav>
       </div>
     </header>

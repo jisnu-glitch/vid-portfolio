@@ -2,43 +2,18 @@
 import { useState, useEffect } from "react";
 
 const NAME   = "Jishnu Vijayan";
-const CHARS  = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const LABELS = ["VIDEO EDITOR", "COLORIST"];
 
 export default function HeroTitle() {
-  const [display, setDisplay]         = useState(() => NAME.replace(/\S/g, "·"));
-  const [nameSettled, setNameSettled] = useState(false);
-  const [tickerIn, setTickerIn]       = useState(false);
+  const [tickerIn, setTickerIn] = useState(false);
 
   useEffect(() => {
-    const boot = setTimeout(() => {
-      const TOTAL = 26;
-      let frame   = 0;
+    // Reveal ticker smoothly once the title focus resolves
+    const timer = setTimeout(() => {
+      setTickerIn(true);
+    }, 820);
 
-      const tick = setInterval(() => {
-        frame++;
-        const resolved = Math.floor((frame / TOTAL) * NAME.length);
-
-        setDisplay(
-          NAME.split("").map((ch, i) => {
-            if (ch === " ") return " ";
-            if (i < resolved) return ch;
-            return CHARS[Math.floor(Math.random() * CHARS.length)];
-          }).join("")
-        );
-
-        if (frame >= TOTAL) {
-          clearInterval(tick);
-          setDisplay(NAME);
-          setNameSettled(true);
-          setTimeout(() => setTickerIn(true), 250);
-        }
-      }, 48);
-
-      return () => clearInterval(tick);
-    }, 320);
-
-    return () => clearTimeout(boot);
+    return () => clearTimeout(timer);
   }, []);
 
   // Duplicate the set twice — the track animates to -50% for a seamless loop
@@ -61,12 +36,17 @@ export default function HeroTitle() {
       {/* animated gold accent bar */}
       <div className="ht-accent" />
 
-      {/* scramble → shimmer name */}
-      <h1
-        className={`ht-name${nameSettled ? " ht-name--shimmer" : ""}`}
-        aria-label={NAME}
-      >
-        {display}
+      {/* Cinematic optical focus rack name */}
+      <h1 className="ht-name" aria-label={NAME}>
+        {NAME.split("").map((ch, i) => (
+          <span
+            key={i}
+            className="ht-char"
+            style={{ "--char-i": i }}
+          >
+            {ch === " " ? "\u00A0" : ch}
+          </span>
+        ))}
       </h1>
 
       {/* bold yellow marquee ticker */}

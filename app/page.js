@@ -1,7 +1,9 @@
 import GradeSlider from "../components/GradeSlider";
 import HeroTitle from "../components/HeroTitle";
 import SiteHeader from "../components/SiteHeader";
-import { site, hero, projects, pipeline, about, testimonial, links } from "../data/content";
+import LazyProjectGrid from "../components/LazyProjectGrid";
+import Experience from "../components/Experience";
+import { site, hero, projects, experience, pipeline, about, testimonial, links } from "../data/content";
 
 export default function Home() {
   return (
@@ -18,23 +20,10 @@ export default function Home() {
 
           <section id="work">
             <h2>Selected work</h2>
-            <div className="work">
-              {projects.map((p) => (
-                <a key={p.title} href={p.href}>
-                  <div
-                    className="frame"
-                    // style={{ "--a": p.colors[0], "--b": p.colors[1], "--c": p.colors[2], "--x": p.glow }}
-                  >
-                    {p.image && <img src={p.image} alt={`Still from ${p.title}`} />}
-                    <span className="play" />
-                    <span className="tc">{p.duration}</span>
-                  </div>
-                  <h3>{p.title}</h3>
-                  <p>{p.meta}</p>
-                </a>
-              ))}
-            </div>
+            <LazyProjectGrid projects={projects} />
           </section>
+
+          <Experience experience={experience} />
 
           <section id="services">
             <h2>From first cut to final delivery</h2>
@@ -69,9 +58,9 @@ export default function Home() {
 
           <section id="contact" className="contact">
             <h2>Have footage that needs a finish?</h2>
-            <a className="mail" href={`mailto:${site.email}`}>{site.email}</a>
+            <a className="mail " href={`mailto:${site.email}`}>{site.email}</a>
             <div className="links">
-              {links.map((l) => <a key={l.label} href={l.href}>{l.label}</a>)}
+              {links.map((l) => <a key={l.label} href={l.href}>{l.label} </a>)}
             </div>
           </section>
         </main>
