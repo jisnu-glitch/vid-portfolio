@@ -228,9 +228,10 @@ button.theme:hover{background:#FFD600;color:#000;border-color:#FFD600}
   background:linear-gradient(180deg,#0c2530,#05141b);
   clip-path:polygon(0 38%,12% 22%,26% 40%,41% 14%,57% 36%,72% 20%,88% 42%,100% 30%,100% 100%,0 100%)}
 .scene.flat{filter:saturate(.28) contrast(.55) brightness(1.25);clip-path:inset(0 calc(100% - var(--p)) 0 0)}
+.scene.graded{clip-path:inset(0 calc(100% - var(--p)) 0 0);z-index:1}
 .scene.img{background:none}
 .scene.img::after{display:none}
-.scene.flat.img{filter:none}
+.scene.flat.img,.scene.graded.img{filter:none}
 .scene img,.scene video{width:100%;height:100%;object-fit:cover;display:block}
 .tag{position:absolute;top:14px;font-size:14px;padding:4px 12px;border-radius:999px;background:rgba(20,20,20,.72);color:#f2f2f2;z-index:2}
 .tag.l{left:14px}.tag.r{right:14px}
@@ -238,6 +239,29 @@ button.theme:hover{background:#FFD600;color:#000;border-color:#FFD600}
 .handle::after{content:"";position:absolute;top:50%;left:50%;width:34px;height:34px;margin:-17px;border-radius:50%;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.25)}
 .grade input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;z-index:4}
 .grade:has(input:focus-visible){outline:2px solid var(--ink);outline-offset:3px}
+
+/* Easy Ease automatic transition */
+.grade--animating .handle{
+  transition:left 2.2s cubic-bezier(0.42, 0, 0.58, 1);
+}
+.grade--animating .scene.graded{
+  transition:clip-path 2.2s cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+/* Auto Wipe replay button */
+.grade-replay-pill{
+  position:absolute;bottom:14px;right:14px;
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(20,20,20,.75);color:#f2f2f2;
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:999px;padding:5px 12px;
+  font:600 12px/1 var(--body);letter-spacing:.02em;
+  cursor:pointer;z-index:5;
+  transition:background .2s,border-color .2s,color .2s;
+}
+.grade-replay-pill:hover{
+  background:#FFD600;color:#000;border-color:#FFD600;
+}
 .caption{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:15px;color:var(--mute)}
 
 section{padding:clamp(48px,8vw,96px) 0;border-top:1px solid var(--line)}
