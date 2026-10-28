@@ -6,6 +6,51 @@ import Experience from "../components/Experience";
 import ServicesTimeline from "../components/ServicesTimeline";
 import { site, hero, projects, experience, pipeline, about, testimonial, links } from "../data/content";
 
+function SocialIcon({ label }) {
+  const norm = label.toLowerCase();
+  if (norm.includes("insta")) {
+    return (
+      <svg
+        className="social-platform-icon"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+      </svg>
+    );
+  }
+  if (norm.includes("link")) {
+    return (
+      <svg
+        className="social-platform-icon"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+        <rect x="2" y="9" width="4" height="12" />
+        <circle cx="4" cy="4" r="2" />
+      </svg>
+    );
+  }
+  return null;
+}
+
 export default function Home() {
   return (
     <>
@@ -81,9 +126,30 @@ export default function Home() {
             </div>
             <div className="links">
               {links.map((l) => (
-                <a key={l.label} href={l.href} className="social-link">
+                <a
+                  key={l.label}
+                  href={l.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-link"
+                >
+                  <SocialIcon label={l.label} />
                   <span>{l.label}</span>
-                  <span className="social-arrow" aria-hidden="true">↗</span>
+                  <svg
+                    className="social-arrow"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <line x1="7" y1="17" x2="17" y2="7" />
+                    <polyline points="7 7 17 7 17 17" />
+                  </svg>
                 </a>
               ))}
             </div>
