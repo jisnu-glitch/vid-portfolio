@@ -38,15 +38,29 @@ export default function HeroTitle() {
 
       {/* Cinematic optical focus rack name */}
       <h1 className="ht-name" aria-label={NAME}>
-        {NAME.split("").map((ch, i) => (
-          <span
-            key={i}
-            className="ht-char"
-            style={{ "--char-i": i }}
-          >
-            {ch === " " ? "\u00A0" : ch}
-          </span>
-        ))}
+        <span className="ht-word">
+          {"Jishnu".split("").map((ch, i) => (
+            <span
+              key={i}
+              className="ht-char"
+              style={{ "--char-i": i }}
+            >
+              {ch}
+            </span>
+          ))}
+        </span>
+        <span className="ht-space"> </span>
+        <span className="ht-word">
+          {"Vijayan".split("").map((ch, i) => (
+            <span
+              key={i + 7}
+              className="ht-char"
+              style={{ "--char-i": i + 7 }}
+            >
+              {ch}
+            </span>
+          ))}
+        </span>
       </h1>
 
       {/* bold yellow marquee ticker */}
