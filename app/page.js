@@ -74,10 +74,24 @@ export default function Home() {
           </section>
 
           <section id="contact" className="contact">
+            <div className="contact-status-badge">
+              <span className="live-rec-dot" aria-hidden="true" />
+              <span className="status-label">SYSTEM ONLINE // {site.availability.toUpperCase()}</span>
+            </div>
             <h2>Have footage that needs a finish?</h2>
-            <a className="mail " href={`mailto:${site.email}`}>{site.email}</a>
+            <div className="mail-container">
+              <a className="mail" href={`mailto:${site.email}`}>
+                <span className="mail-text">{site.email}</span>
+                <span className="mail-flare" aria-hidden="true" />
+              </a>
+            </div>
             <div className="links">
-              {links.map((l) => <a key={l.label} href={l.href}>{l.label} </a>)}
+              {links.map((l) => (
+                <a key={l.label} href={l.href} className="social-link">
+                  <span>{l.label}</span>
+                  <span className="social-arrow" aria-hidden="true">↗</span>
+                </a>
+              ))}
             </div>
           </section>
         </main>
