@@ -1,10 +1,24 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Experience({ experience }) {
   if (!experience || experience.length === 0) return null;
 
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused]       = useState(false);
+
+  const works = experience[0]?.works || [];
+
+  // Auto-cycle through the 5 clips every 3.8s unless hovered or tapped
+  useEffect(() => {
+    if (isPaused || works.length <= 1) return;
+
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % works.length);
+    }, 3800);
+
+    return () => clearInterval(timer);
+  }, [isPaused, works.length]);
 
   return (
     <section id="experience" className="experience-section">
@@ -16,7 +30,6 @@ export default function Experience({ experience }) {
         {experience.map((exp, expIdx) => {
           const orgName = exp.organisation || exp.org;
           const roleName = exp.position || exp.role;
-          const works = exp.works || [];
 
           return (
             <div key={expIdx} className="exp-org-block">
@@ -39,6 +52,9 @@ export default function Experience({ experience }) {
                 className="exp-strip-container"
                 role="tablist"
                 aria-label="Experience Productions"
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
+                onTouchStart={() => setIsPaused(true)}
               >
                 {works.map((work, wIdx) => {
                   const eventName = work.eventName || work.event;
@@ -147,23 +163,41 @@ export default function Experience({ experience }) {
                 })}
               </div>
 
-              {/* Timeline Track Scrubber */}
+              {/* Timeline Track Scrubber with Countdown Progress */}
               <div className="exp-scrubber-bar" aria-hidden="true">
                 <div className="exp-scrubber-track">
-                  {works.map((_, i) => (
-                    <button
-                      key={i}
-                      type="button"
-                      className={`exp-scrubber-pip ${
-                        activeIndex === i ? "exp-scrubber-pip--active" : ""
-                      }`}
-                      onClick={() => setActiveIndex(i)}
-                      aria-label={`Jump to clip ${i + 1}`}
-                    />
-                  ))}
+                  {works.map((_, i) => {
+                    const isActive = activeIndex === i;
+                    return (
+                      <button
+                        key={i}
+                        type="button"
+                        className={`exp-scrubber-pip ${
+                          isActive ? "exp-scrubber-pip--active" : ""
+                        }`}
+                        onClick={() => {
+                          setActiveIndex(i);
+                          setIsPaused(true);
+                        }}
+                        aria-label={`Jump to clip ${i + 1}`}
+                      >
+                        {isActive && (
+                          <span
+                            key={`fill-${activeIndex}`}
+                            className="exp-pip-fill"
+                            style={{
+                              animationPlayState: isPaused ? "paused" : "running",
+                            }}
+                          />
+                        )}
+                      </button>
+                    );
+                  })}
                 </div>
                 <span className="exp-scrubber-hint">
-                  HOVER OR CLICK TO EXPLORE REELS
+                  {isPaused
+                    ? "AUTO-CYCLE PAUSED // CLICK TO JUMP"
+                    : "AUTO-CYCLE ACTIVE // HOVER TO PAUSE"}
                 </span>
               </div>
             </div>

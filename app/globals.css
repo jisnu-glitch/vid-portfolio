@@ -509,17 +509,30 @@ dd{font-weight:500}
   display:flex;gap:6px;align-items:center;
 }
 .exp-scrubber-pip{
+  position:relative;
   width:28px;height:4px;border-radius:2px;
   background:var(--line);border:none;padding:0;
-  cursor:pointer;
-  transition:all .25s ease;
+  cursor:pointer;overflow:hidden;
+  transition:width .3s ease,background .25s ease;
 }
 .exp-scrubber-pip:hover{
   background:var(--ink);
 }
 .exp-scrubber-pip--active{
-  width:44px;background:#FFD600;
-  box-shadow:0 0 8px rgba(255,214,0,.5);
+  width:48px;
+  background:rgba(255,214,0,.25);
+  box-shadow:0 0 8px rgba(255,214,0,.35);
+}
+.exp-pip-fill{
+  position:absolute;top:0;left:0;bottom:0;width:100%;
+  background:#FFD600;
+  box-shadow:0 0 8px rgba(255,214,0,.7);
+  transform-origin:left;
+  animation:exp-pip-fill-anim 3.8s linear forwards;
+}
+@keyframes exp-pip-fill-anim{
+  from{transform:scaleX(0)}
+  to{transform:scaleX(1)}
 }
 .exp-scrubber-hint{
   font:700 10.5px/1 var(--body);
