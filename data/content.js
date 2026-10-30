@@ -6,7 +6,7 @@ export const site = {
   title: "Jishnu Vijayan – Video Editor & Colorist",
   description:
     "Video editor and colorist creating cinematic travel films, personal videos, college films, event videos and music-driven edits.",
-  email: "thiagovenv10@gmail.com",
+  email: "jishnuvijayan168@gmail.com",
   availability: "Available for freelance projects.",
 };
 
